@@ -7,7 +7,7 @@ from bcrypt import hashpw
 from hashlib import sha256
 from os import remove
 
-remove('images/​')
+remove('images/​') # the file in images/
 key = bytes(
   sha256(bytes('Your key', 'utf-8')).hexdigest(), 
   'utf-8'
