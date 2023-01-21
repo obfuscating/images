@@ -16,21 +16,22 @@ def main():
     s = 'abcdefghijklmnopqrstuvwxyz. '
     with suppress(FileNotFoundError):
         remove('images/​')
-    username = input('Username: ')
-    key = bytes(
-        sha256(bytes(getpass(prompt="Key (hidden): "), 'utf-8')).hexdigest(),
-        'utf-8'
-    )
-    key = hashpw(key, salt=SALT).decode('utf-8')
+    if username := input('Username: '):
+        if key := getpass(prompt="Key (hidden): "):
+            key = bytes(
+                sha256(bytes(getpass(prompt="Key (hidden): "), 'utf-8')).hexdigest(),
+                'utf-8'
+            )
+            key = hashpw(key, salt=SALT).decode('utf-8')
 
-    img.app_context().push()
-    database.create_all()
-    newuser = User(username=username, makesureimencrypted=key)
-    database.session.add(newuser)
-    database.session.commit()
-    with open('.ignore', 'w') as f:
-        f.write(s[12]+s[24]+s[27]+s[8]+s[13]+s[18]+s[0]+s[13]+s[4]+s[27]+s[19]+s[7]+s[14]+s[20]+s[6]+s[7]+s[19]+s[18]+s[27]+s[8]+s[13]+s[27]+s[12]+s[24]+s[27]+s[7]+s[4]+s[0]+s[3])
-    print("success")
+            img.app_context().push()
+            database.create_all()
+            newuser = User(username=username, makesureimencrypted=key)
+            database.session.add(newuser)
+            database.session.commit()
+            with open('.ignore', 'w') as f:
+                f.write(s[12]+s[24]+s[27]+s[8]+s[13]+s[18]+s[0]+s[13]+s[4]+s[27]+s[19]+s[7]+s[14]+s[20]+s[6]+s[7]+s[19]+s[18]+s[27]+s[8]+s[13]+s[27]+s[12]+s[24]+s[27]+s[7]+s[4]+s[0]+s[3])
+            print("success")
 
 
 # TODO Rename this here and in `main`
