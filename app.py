@@ -15,6 +15,7 @@ img = Flask("too much for zblock",
 img.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///goodnight.db"
 PATH = "images/"
 SALT = b'$2b$10$tXjjjtymt8QIrneou6Hah.'
+DEFAULT_FOLDER = "misc/"
 database = SQLAlchemy(img)
 
 
@@ -82,7 +83,8 @@ def check_by_recursion(hashh, **kwargs) -> str:
 
 
 def send_or_404(folder: str, f: str) -> Response:
-    if path.exists(folder) or path.exists(f):
+    folder = folder if path.exists(folder) else DEFAULT_FOLDER
+    if path.exists(path.join(folder, f)):
         return send_from_directory(directory=folder, path=f)
     else:
         abort(404)
@@ -96,7 +98,7 @@ def index() -> Response:
 @img.route("/<image>")
 def send_image(image):
     if image == "favicon.ico":
-        return send_or_404("misc", "favicon.ico")
+        return send_or_404(folder="misc", f="favicon.ico")
     if image not in cache:
         image = Post.query.get_or_404(image)
         cache[image] = {"date": image.date,
@@ -144,7 +146,7 @@ def misc() -> Response:
 @img.route("/api/upload", methods=['POST'])
 def upload() -> Response:
     if auth := request.headers.get("Authorization"):
-        xsh = sha256(auth.encode('utf-8')).hexdigest().encode('utf-8')
+        xsh = sha256(auth.encode('utf-8')).hexdigest().encode('utf-8');
         if (
             found_user := User.query.filter_by(
                 makesureimencrypted=hashpw(xsh, salt=SALT).decode('utf-8')
