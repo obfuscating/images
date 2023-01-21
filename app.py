@@ -191,4 +191,8 @@ def upload() -> Response:
 
 
 if __name__ == "__main__":
+    if not path.exists(".ignore"):
+        print('Run first_run.py or create a file with the name \'.ignore\'\nPress enter to exit...')
+        input()
+        exit(-1)
     img.run(host="0.0.0.0", port=1111)
