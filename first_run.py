@@ -19,7 +19,7 @@ def main():
     if username := input('Username: '):
         if key := getpass(prompt="Key (hidden): "):
             key = bytes(
-                sha256(bytes(getpass(prompt="Key (hidden): "), 'utf-8')).hexdigest(),
+                sha256(bytes(key, 'utf-8')).hexdigest(),
                 'utf-8'
             )
             key = hashpw(key, salt=SALT).decode('utf-8')
