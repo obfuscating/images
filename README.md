@@ -12,7 +12,7 @@ key = bytes(
   sha256(bytes('Your key', 'utf-8')).hexdigest(), 
   'utf-8'
 )
-key = hashpw(key, salt=SALT)
+key = hashpw(key, salt=SALT).decode('utf-8')
 
 img.app_context().push()
 database.create_all()
