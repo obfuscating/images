@@ -1,4 +1,4 @@
-# Some image host made in 10 minutes
+## ripped frontend from [gamesense.pub](https://gamesense.pub)
 
 ## How to setup
 ```python
