@@ -1,5 +1,10 @@
 ## ripped frontend from [gamesense.pub](https://gamesense.pub)
 
+## Install modules
+```bash
+pip install -r requirements.txt
+```
+
 ## ShareX
 ```json
 {
