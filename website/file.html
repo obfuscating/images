@@ -1,104 +1,69 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="t.me/skeeted" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="ROBOTS" content="NOINDEX, FOLLOW" />
-    <title>{{request.host}}</title>
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="{{request.host_url}}{{file}}" />
-    <meta name="twitter:image:src" content="{{request.host_url}}{{file}}" />
-    <meta name="og:image" content="{{request.host_url}}{{file}}" />
-    <meta name="theme-color" content="#95b806" />
-    <meta
-      property="og:title"
-      content="{{by}} @ {{request.host.split(':')[0]}}"
-    />
-    <meta
-      name="twitter:title"
-      content="{{by}} @ {{request.host.split(':')[0]}}"
-    />
-    <meta
-      name="twitter:description"
-      content="Image hosted on {{request.host.split(':')[0]}}"
-    />
-    <meta
-      property="og:description"
-      content="Image hosted on {{request.host.split(':')[0]}}"
-    />
-    <link rel="stylesheet" type="text/css" href="/misc/Cobalt.min.css" />
-    <link href="/misc/css" rel="stylesheet" type="text/css" />
-  </head>
-
-  <body>
-    <div id="punindex" class="pun">
-      <div class="top-box"></div>
-      <div class="punwrap">
-        <div id="brdheader" class="block">
-          <div class="box">
-            <div id="brdtitle" class="inbox">
-              <h1>
-                <a href="/">game<span>sense</span></a>
-              </h1>
-              <div id="brddesc"></div>
-            </div>
-            <div id="brdmenu" class="inbox">
-              <ul>
-                <li id="navindex" class="isactive"><a href="/">Index</a></li>
-              </ul>
-            </div>
-            <div id="brdwelcome" class="inbox">
-              <p class="conl">{{by}} - {{date}}</p>
-              <div class="clearer"></div>
-            </div>
-          </div>
-        </div>
-
-        <div id="brdmain">
-          <div id="msg" class="block">
-            <h2><span>Image</span></h2>
-            <div class="box">
-              <div
-                class="inbox"
-                style="
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  flex-direction: column;
-                  padding: 16px 0 0 0;
-                "
-              >
-                <div class="box" style="border-width: 2.5px">
-                  <img
-                    src="{{file}}"
-                    alt="img"
-                    height="100%"
-                    style="
-                      max-height: 50vh;
-                      max-width: 40vw;
-                      border-style: solid;
-                      border-width: 2px 0 0 0;
-                      border-image-slice: 1;
-                      border-image-source: linear-gradient(
-                        90deg,
-                        rgba(30, 87, 153, 1) 0%,
-                        rgba(243, 0, 255, 1) 50%,
-                        rgba(224, 255, 0, 1) 100%
-                      );
-                    "
-                  />
-                </div>
-                <p style="padding: 16px">
-                  <a href="/{{file}}?d=true">Download</a>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="t.me/skeeted">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta name="ROBOTS" content="NOINDEX, FOLLOW">
+		<title>{{request.host}}</title>
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:image" content="{{request.host_url}}{{file}}">
+		<meta name="twitter:image:src" content="{{request.host_url}}{{file}}">
+		<meta name="og:image" content="{{request.host_url}}{{file}}">
+		<meta name="theme-color" content="#95b806">
+		<meta property="og:title" content="{{by}} @ {{request.host.split(':')[0]}}">
+		<meta name="twitter:title" content="{{by}} @ {{request.host.split(':')[0]}}">
+		<meta name="twitter:description" content="Image hosted on {{request.host.split(':')[0]}}">
+		<meta property="og:description" content="Image hosted on {{request.host.split(':')[0]}}">
+		<link rel="stylesheet" type="text/css" href="/misc/Cobalt.min.css">
+		<link href="/misc/css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<div id="punindex" class="pun">
+			<div class="top-box"></div>
+			<div class="punwrap">
+				<div id="brdheader" class="block">
+					<div class="box">
+						<div id="brdtitle" class="inbox">
+							<h1>
+								<a href="/">game<span>sense</span>
+								</a>
+							</h1>
+							<div id="brddesc"></div>
+						</div>
+						<div id="brdmenu" class="inbox">
+							<ul>
+								<li id="navindex" class="isactive">
+									<a href="/">Index</a>
+								</li>
+							</ul>
+						</div>
+						<div id="brdwelcome" class="inbox">
+							<p class="conl">{{by}} - {{date}}</p>
+							<div class="clearer"></div>
+						</div>
+					</div>
+				</div>
+				<div id="brdmain">
+					<div id="msg" class="block">
+						<h2>
+							<span>Image</span>
+						</h2>
+						<div class="box">
+							<div class="inbox" style="display:flex;justify-content:center;align-items:center;flex-direction:column;padding:16px">
+								<div class="box" style="border-width:2.5px">
+									<img src="{{file}}" alt="img" height="100%" style="max-height:50vh;max-width:40vw;border-style:solid;border-width:2px 0 0 0;border-image-slice:1;border-image-source:linear-gradient(90deg,rgba(30,87,153,1) 0,rgba(243,0,255,1) 50%,rgba(224,255,0,1) 100%)">
+								</div>
+								<p style="padding:16px">
+									<a href="/{{file}}?d=true">Download</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
