@@ -1,8 +1,9 @@
 ## ripped frontend from [gamesense.pub](https://gamesense.pub)
 
-## Install modules
+## First run
 ```bash
 pip install -r requirements.txt
+python3 first_run.py
 ```
 
 ## ShareX
