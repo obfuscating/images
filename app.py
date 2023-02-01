@@ -18,11 +18,11 @@ from flask_sqlalchemy import SQLAlchemy
 from bcrypt import hashpw
 
 
-img = Flask(__name__, template_folder='website', static_folder='static')
+img = Flask(__name__, template_folder='website', static_folder='misc')
 img.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///goodnight.db'
 PATH = 'images/'
 SALT = b'$2b$10$tXjjjtymt8QIrneou6Hah.'
-DEFAULT_FOLDER = 'static/assets/'
+DEFAULT_FOLDER = 'misc/'
 database = SQLAlchemy(img)
 
 # make a nice looking datatime
@@ -115,7 +115,7 @@ def index() -> Response:
 @img.route('/<image>')
 def send_image(image):
     if image == 'favicon.ico':
-        return send_or_404(folder='static/assets/images', f='favicon.ico')
+        return send_or_404(folder='misc', f='favicon.ico')
     if image not in cache:
         image = Post.query.get_or_404(image)
         cache[image] = {'date': image.date, 'file': image.file, 'by': image.by}
