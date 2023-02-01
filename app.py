@@ -1,5 +1,6 @@
 from hashlib import sha256
 from os import path, urandom, remove
+from imghdr import what
 from random import randint
 from datetime import datetime, timezone
 from flask import (
@@ -27,7 +28,7 @@ database = SQLAlchemy(img)
 
 # make a nice looking datatime
 def nice_date() -> str:
-    return datetime.now(timezone.utc).strftime('%d/%m/%Y %I:%M %p')
+    return datetime.now(timezone.utc).strftime('%m/%d/%Y %I:%M %p') # USA USA !
 
 
 class Post(database.Model):
@@ -164,31 +165,32 @@ def upload() -> Response:
             password=hashpw(xsh, salt=SALT).decode('utf-8')
         ).first():
             if imgfile := request.files.get('img'):
-                hashgened = urandom(20) + found_user.username.encode('utf-8')
-                name = check_by_recursion(
-                    sha256(hashgened).hexdigest()[: randint(6, 12)],
-                    user=found_user.username.encode('utf-8'),
-                )
-                filepath = path.join(
-                    PATH, f'{name}.{imgfile.filename.split(".")[-1]}'
-                )
-                del_key = sha256(
-                    name.encode('utf-8') + found_user.password.encode('utf-8')
-                ).hexdigest()
-                save_data(
-                    name,
-                    filepath,
-                    found_user.username,
-                    request.files.get('img'),
-                    del_key,
-                )
-                return jsonify(
-                    {
-                        'url': f'{request.host_url}{name}',
-                        'raw': f'{request.host_url}{filepath}',
-                        'deletion': f'{request.host_url}{name}/delete/{del_key}',
-                    }
-                )
+                if imgformat := what(imgfile.stream):
+                    hashgened = urandom(20) + found_user.username.encode('utf-8')
+                    name = check_by_recursion(
+                        sha256(hashgened).hexdigest()[: randint(6, 12)],
+                        user=found_user.username.encode('utf-8'),
+                    )
+                    filepath = path.join(
+                        PATH, f'{name}.{imgformat}'
+                    )
+                    del_key = sha256(
+                        name.encode('utf-8') + found_user.password.encode('utf-8')
+                    ).hexdigest()
+                    save_data(
+                        name,
+                        filepath,
+                        found_user.username,
+                        request.files.get('img'),
+                        del_key,
+                    )
+                    return jsonify(
+                        {
+                            'url': f'{request.host_url}{name}',
+                            'raw': f'{request.host_url}{filepath}',
+                            'deletion': f'{request.host_url}{name}/delete/{del_key}',
+                        }
+                    )
             abort(400)
         abort(401)
     abort(401)
@@ -199,4 +201,4 @@ if __name__ == '__main__':
         print("run 'python3 first_run.py' to setup the server")
         input()
         exit(-1)
-    img.run(host='0.0.0.0', debug=False, port=8080)
+    img.run(host='0.0.0.0', port=8080)
